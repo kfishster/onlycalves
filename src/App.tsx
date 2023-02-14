@@ -6,18 +6,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+        <p className='label'>
+          OnlyCalves official website
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="definition">
+          <img src="https://thumbs.dreamstime.com/b/fitness-healthy-leg-muscle-leg-muscleillustration-design-vector-isolated-white-background-122386596.jpg" className="App-logo" alt="logo" />
+          <p className='label'>Definition (noun) (ˈkävz): The fleshy back part of the leg below the knee</p>
+        </div>
       </header>
     </div>
   );

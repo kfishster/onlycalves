@@ -9,19 +9,33 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 5s linear reverse;
   }
 }
 
+.definition p {
+  visibility: hidden;
+  z-index: 1;
+  position: relative
+}
+
+.definition:hover p {
+  visibility: visible;
+}
+
 .App-header {
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
+}
+
+.label {
+  z-index: 1;
 }
 
 .App-link {
