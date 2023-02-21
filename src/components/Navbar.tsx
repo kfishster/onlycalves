@@ -6,14 +6,15 @@ export interface NavbarProps {
   useDarkMode: (isChecked: boolean) => void;
 }
 
+const taglines = [
+  "this is my better calf",
+  "calf and calf",
+  "calf full, or calf empty? you be the judge",
+  "just wait till you see my other calf",
+];
+
 export function Navbar({ isDarkMode, useDarkMode }: NavbarProps) {
   const [tagline, setTagline] = useState("Loading...");
-  const taglines = [
-    "this is my better calf",
-    "calf and calf",
-    "calf full, or calf empty? you be the judge",
-    "just wait till you see my other calf",
-  ];
 
   useEffect(() => {
     setTagline(taglines[Math.floor(Math.random() * taglines.length)]);
