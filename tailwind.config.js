@@ -13,10 +13,13 @@ module.exports = {
       rotate: {
         16: '16deg'
       },
+      aspectRatio: {
+        '3/4': '3 / 4'
+      },
       keyframes: {
         cardright: {
           '0%': {
-            transform: 'rotate(0deg) translateX(-10.5rem) scale(.75)'
+            transform: 'rotate(0deg) translateX(-8.5rem) scale(.75)'
           },
           '100%': {
             transform: 'rotate(12deg)'
@@ -24,7 +27,7 @@ module.exports = {
         },
         cardleft: {
           '0%': {
-            transform: 'rotate(0deg) translateX(10.5rem) scale(.75)'
+            transform: 'rotate(0deg) translateX(8.5rem) scale(.75)'
           },
           '100%': {
             transform: 'rotate(-12deg)'

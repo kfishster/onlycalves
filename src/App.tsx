@@ -23,7 +23,7 @@ function App() {
   return (
     <div className={isDarkMode ? "dark" : ""}>
       <div
-        className={`flex transition-colors duration-1000 flex-col items-center h-screen gap-8 p-8 ${themeClasses}`}
+        className={`flex transition-colors duration-1000 flex-col items-center h-full gap-8 p-8 w-screen ${themeClasses}`}
       >
         <Navbar isDarkMode={isDarkMode} useDarkMode={useDarkMode} />
         {/* <p>Choose the better calf</p> */}
@@ -33,7 +33,7 @@ function App() {
             className="flex h-80 w-80 animate-slowspin"
             alt="logo"
           /> */}
-          <div className="flex flex-row gap-24">
+          <div className="flex flex-row h-64 items-center w-full content-between gap-24 justify-center">
             <CalfCard
               cardType={CardType.Left}
               title="Calf 2"
