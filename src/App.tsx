@@ -21,7 +21,7 @@ function App() {
     : themeDefaultTopLevelClasses["light"];
 
   return (
-    <div className={isDarkMode ? "dark" : ""}>
+    <div className={`h-screen ${isDarkMode ? "dark" : ""}`}>
       <div
         className={`flex transition-colors duration-1000 flex-col items-center h-full gap-8 p-8 w-screen ${themeClasses}`}
       >
@@ -33,7 +33,7 @@ function App() {
             className="flex h-80 w-80 animate-slowspin"
             alt="logo"
           /> */}
-          <div className="flex flex-row h-64 items-center w-full content-between gap-24 justify-center">
+          <div className="flex flex-row h-52 md:h-64 items-center md:w-3/5 w-full md:justify-center md:gap-20 justify-between px-2">
             <CalfCard
               cardType={CardType.Left}
               title="Calf 2"
