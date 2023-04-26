@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Theme, setTagline, setTheme } from "../store/settingsSlice";
@@ -18,7 +18,7 @@ export function Navbar() {
 
   useEffect(() => {
     dispatch(setTagline(taglines[Math.floor(Math.random() * taglines.length)]));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="flex flex-row items-center gap-2 justify-between h-24 w-screen px-8">
