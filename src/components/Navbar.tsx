@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import DarkModeToggle from "react-dark-mode-toggle";
-
-export interface NavbarProps {
-  isDarkMode: boolean;
-  useDarkMode: (isChecked: boolean) => void;
-}
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { Theme, setTagline, setTheme } from "../store/settingsSlice";
 
 const taglines = [
   "this is my better calf",
@@ -14,11 +11,13 @@ const taglines = [
   "(noun) (ˈkävz): The fleshy back part of the leg below the knee",
 ];
 
-export function Navbar({ isDarkMode, useDarkMode }: NavbarProps) {
-  const [tagline, setTagline] = useState("Loading...");
+export function Navbar() {
+  const dispatch = useAppDispatch();
+  const theme = useAppSelector((state) => state.settings.theme);
+  const tagline = useAppSelector((state) => state.settings.tagline);
 
   useEffect(() => {
-    setTagline(taglines[Math.floor(Math.random() * taglines.length)]);
+    dispatch(setTagline(taglines[Math.floor(Math.random() * taglines.length)]));
   }, []);
 
   return (
@@ -30,7 +29,13 @@ export function Navbar({ isDarkMode, useDarkMode }: NavbarProps) {
         <h1 className="flex text-3xl md:text-5xl font-bold">OnlyCalves</h1>
         <h1 className="flex text-lg md:text-2xl font-light">{tagline}</h1>
       </div>
-      <DarkModeToggle onChange={useDarkMode} checked={isDarkMode} size={60} />
+      <DarkModeToggle
+        onChange={() =>
+          dispatch(setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark))
+        }
+        checked={theme === Theme.Dark}
+        size={60}
+      />
     </div>
   );
 }

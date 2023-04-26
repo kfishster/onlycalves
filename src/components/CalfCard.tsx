@@ -1,4 +1,5 @@
 import { Transition } from "@headlessui/react";
+import { VotingCard } from "../store/cardsSlice";
 
 export enum CardType {
   Left,
@@ -7,16 +8,14 @@ export enum CardType {
 
 export interface CardProps {
   cardType: CardType;
-  title: string;
-  subtitle: string;
+  cardContents?: VotingCard;
   isShowing: boolean;
   onSelected: () => void;
 }
 
 export function CalfCard({
   cardType,
-  title,
-  subtitle,
+  cardContents,
   isShowing,
   onSelected,
 }: CardProps) {
@@ -54,17 +53,25 @@ export function CalfCard({
         leave="transition-all duration-500"
         className={"flex flex-col"}
       >
-        <div className="flex h-full rounded-t-xl border-t border-x border-zinc-700 dark:border-zinc-100 group-hover:ring-green-500 group-hover:ring-4 overflow-clip">
-          <img
-            src="https://thumbs.dreamstime.com/b/fitness-healthy-leg-muscle-leg-muscleillustration-design-vector-isolated-white-background-122386596.jpg"
-            alt="logo"
-            className="flex w-full object-cover"
-          />
-        </div>
-        <div className="w-full transition-color bg-zinc-200 dark:bg-zinc-600 p-3 rounded-b-xl border-x border-b border-zinc-700 dark:border-zinc-100 group-hover:ring-green-500 group-hover:ring-4">
-          <p className="text-sm text-center font-semibold">{title}</p>
-          <p className="text-xs text-center">{subtitle}</p>
-        </div>
+        {cardContents ? (
+          <>
+            <div className="flex h-full rounded-t-xl border-t border-x border-zinc-700 dark:border-zinc-100 group-hover:ring-green-500 group-hover:ring-4 overflow-clip">
+              <img
+                src={cardContents.imgUrl}
+                alt="logo"
+                className="flex w-full object-cover"
+              />
+            </div>
+            <div className="w-full transition-color bg-zinc-200 dark:bg-zinc-600 p-3 rounded-b-xl border-x border-b border-zinc-700 dark:border-zinc-100 group-hover:ring-green-500 group-hover:ring-4">
+              <p className="text-sm text-center font-semibold">
+                {cardContents.title}
+              </p>
+              <p className="text-xs text-center">{cardContents.subtitle}</p>
+            </div>
+          </>
+        ) : (
+          <div>Loading...</div>
+        )}
       </Transition>
     </button>
   );
