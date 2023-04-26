@@ -11,6 +11,7 @@ const taglines = [
   "calf and calf",
   "calf full, or calf empty? you be the judge",
   "just wait till you see my other calf",
+  "(noun) (ˈkävz): The fleshy back part of the leg below the knee",
 ];
 
 export function Navbar({ isDarkMode, useDarkMode }: NavbarProps) {

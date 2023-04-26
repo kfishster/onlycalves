@@ -10,6 +10,7 @@ function App() {
   ).matches;
 
   const [isDarkMode, useDarkMode] = useState(isSystemDarkMode);
+  const [isShowing, setIsShowing] = useState(true);
 
   const themeDefaultTopLevelClasses = {
     dark: "dark:text-stone-200 dark:bg-slate-800",
@@ -20,35 +21,36 @@ function App() {
     ? themeDefaultTopLevelClasses["dark"]
     : themeDefaultTopLevelClasses["light"];
 
+  const onCardSelected = () => {
+    setIsShowing(false);
+    setTimeout(() => {
+      setIsShowing(true);
+    }, 1000);
+  };
+
   return (
     <div className={`h-screen ${isDarkMode ? "dark" : ""}`}>
       <div
         className={`flex transition-colors duration-1000 flex-col items-center h-full gap-8 p-8 w-screen ${themeClasses}`}
       >
         <Navbar isDarkMode={isDarkMode} useDarkMode={useDarkMode} />
-        {/* <p>Choose the better calf</p> */}
-        <div className="group flex flex-col items-center gap-4 pt-10">
-          {/* <img
-            src="https://thumbs.dreamstime.com/b/fitness-healthy-leg-muscle-leg-muscleillustration-design-vector-isolated-white-background-122386596.jpg"
-            className="flex h-80 w-80 animate-slowspin"
-            alt="logo"
-          /> */}
-          <div className="flex flex-row h-52 md:h-64 items-center md:w-3/5 w-full md:justify-center md:gap-20 justify-between px-2">
+        <div className="flex flex-col items-center gap-4 py-10 w-full">
+          <div className="flex flex-row h-64 md:h-64 md:w-3/5 w-full md:justify-center md:gap-20 justify-between px-2">
             <CalfCard
               cardType={CardType.Left}
               title="Calf 2"
               subtitle="Scorpio, but doesn't act like it"
+              isShowing={isShowing}
+              onSelected={onCardSelected}
             />
             <CalfCard
               cardType={CardType.Right}
               title="Calf 6"
               subtitle="Exfoliates regularly"
+              isShowing={isShowing}
+              onSelected={onCardSelected}
             />
           </div>
-          <p className="label flex text-3xl invisible group-hover:visible pt-8">
-            Definition (noun) (ˈkävz): The fleshy back part of the leg below the
-            knee
-          </p>
         </div>
         <About />
       </div>
