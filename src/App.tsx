@@ -2,9 +2,9 @@ import "./App.css";
 import { Navbar } from "./components/Navbar";
 import { useAppSelector } from "./store/hooks";
 import { Theme } from "./store/settingsSlice";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { CalfConfig } from "./pages/CalfConfig";
+import { CalfConfigPage } from "./pages/CalfConfig";
 
 const AppLayout = () => {
   const theme = useAppSelector((state) => state.settings.theme);
@@ -30,15 +30,24 @@ const AppLayout = () => {
 };
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<AppLayout />}>
-        <Route index element={<Home />} />
-        <Route path="calfConfig" element={<CalfConfig />} />
-        <Route path="*" element={<Home />} />
-      </Route>
-    </Routes>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <AppLayout />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "calfConfig/:userId",
+          element: <CalfConfigPage />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
