@@ -6,6 +6,7 @@ export interface CalfConfig {
   nickname: string;
   title: string;
   subtitle: string;
+  isEnabled: boolean;
 }
 
 export interface SetPictureStatusProps {
@@ -76,6 +77,7 @@ export const configSlice = createSlice({
         nickname: "",
         title: "",
         subtitle: "",
+        isEnabled: true,
       };
 
       state.configType = ConfigType.New;
@@ -103,6 +105,11 @@ export const configSlice = createSlice({
       if (state.config) {
         state.config.subtitle = action.payload;
         state.status = ConfigStatus.Ready;
+      }
+    },
+    setConfigEnabled: (state, action: PayloadAction<boolean>) => {
+      if (state.config) {
+        state.config.isEnabled = action.payload;
       }
     },
     setPictureStatus: (state, action: PayloadAction<SetPictureStatusProps>) => {
@@ -158,5 +165,6 @@ export const {
   deletePicture,
   setPictureStatus,
   removePicture,
+  setConfigEnabled,
 } = configSlice.actions;
 export default configSlice.reducer;

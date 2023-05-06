@@ -17,8 +17,8 @@ export const getRandomImgUrl = (): string => {
   ];
 };
 
-export const getPlaceholderCard = (): VotingCard => {
-  const imgUrl = getRandomImgUrl();
+export const getPlaceholderCard = (imgUrlIdx?: number): VotingCard => {
+  const imgUrl = imgUrlIdx ? placeholderImgUrls[imgUrlIdx] : getRandomImgUrl();
   const subtitle =
     placeholderSubtitles[
       Math.floor(Math.random() * placeholderSubtitles.length)

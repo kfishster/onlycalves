@@ -10,6 +10,7 @@ import {
   fetchedConfig,
   fetchedPictures,
   removePicture,
+  setConfigEnabled,
   setConfigNickname,
   setConfigStatus,
   setConfigSubtitle,
@@ -25,6 +26,7 @@ import {
   uploadPicture,
   writeCalfConfig,
 } from "../utils/apiConnector";
+import { Switch } from "@headlessui/react";
 
 interface EditableConfigPageProps {
   config: CalfConfig;
@@ -301,6 +303,31 @@ export const EditableConfigPage = ({ config }: EditableConfigPageProps) => {
           placeholder="leg day everyday"
           onChange={(value: string) => dispatch(setConfigSubtitle(value))}
         />
+      </div>
+      <div className="flex flex-col w-1/2">
+        <div className="flex flex-row gap-4">
+          <label className="block mb-2 text-md font-bold text-gray-900 dark:text-white">
+            Enable calf
+          </label>
+          <Switch
+            checked={config.isEnabled}
+            onChange={(enabled) => dispatch(setConfigEnabled(enabled))}
+            className={`${
+              config.isEnabled ? "bg-blue-600" : "bg-slate-500"
+            } relative inline-flex h-6 w-11 items-center rounded-full`}
+          >
+            <span
+              className={`${
+                config.isEnabled ? "translate-x-6" : "translate-x-1"
+              } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+            />
+          </Switch>
+        </div>
+        <label className="block mb-2 text-sm italic font-light text-gray-900 dark:text-white">
+          if toggle is on, this calf will show up on the main page, if you're
+          still working on it and it's not ready for the spotlight, feel free to
+          keep this off
+        </label>
       </div>
       <div className="flex flex-col gap-2 w-1/2">
         <div>

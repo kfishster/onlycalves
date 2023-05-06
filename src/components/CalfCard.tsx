@@ -32,10 +32,10 @@ export function CalfCard({
 
   const rotationClass = `${cardType === CardType.Left ? "-" : ""}rotate-12`;
 
-  const transitionStart = `rotate-0 ${translationClass} scale-75 opacity-0`;
-  const transitionEnd = `${rotationClass} opacity-100`;
+  const transitionStart = `rotate-0 ${translationClass} scale-75 opacity-0 h-full`;
+  const transitionEnd = `${rotationClass} opacity-100 h-full`;
 
-  const leaveTo = `${translationClassOut} ${rotationClass} opacity-0 scale-125`;
+  const leaveTo = `${translationClassOut} ${rotationClass} opacity-0 scale-125 h-full`;
 
   return (
     <button
@@ -54,7 +54,7 @@ export function CalfCard({
         className={"flex flex-col"}
       >
         {cardContents ? (
-          <>
+          <div className="h-full">
             <div className="flex h-full rounded-t-xl border-t border-x border-zinc-700 dark:border-zinc-100 group-hover:ring-green-500 group-hover:ring-4 overflow-clip">
               <img
                 src={cardContents.imgUrl}
@@ -68,7 +68,7 @@ export function CalfCard({
               </p>
               <p className="text-xs text-center">{cardContents.subtitle}</p>
             </div>
-          </>
+          </div>
         ) : (
           <div>Loading...</div>
         )}

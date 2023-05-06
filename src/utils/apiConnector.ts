@@ -1,3 +1,4 @@
+import { VotingCard } from "../store/cardsSlice";
 import { CalfConfig } from "../store/configSlice";
 import { CalfUser } from "../store/usersSlice";
 
@@ -21,6 +22,8 @@ export interface CalfPictureResponse {
   properties: CalfPictureResponseProperties;
   containerUrl: string;
 }
+
+export type MatchupResponse = CalfConfig & CalfPictureResponse;
 
 export const fetchCalfConfig = async (
   userId: string
@@ -103,6 +106,20 @@ export const fetchPictures = async (
     });
     const pictures = (await res.json()) as CalfPictureResponse[];
     return pictures;
+  } catch (e) {
+    throw Error("Pictures couldn't be fetched");
+  }
+};
+
+export const fetchRandomMatchup = async (): Promise<
+  MatchupResponse[] | CalfConfigError
+> => {
+  try {
+    const res = await fetch(`${apiRoot}/getMatchup`, {
+      method: "POST",
+    });
+    const matchups = (await res.json()) as MatchupResponse[];
+    return matchups;
   } catch (e) {
     throw Error("Pictures couldn't be fetched");
   }

@@ -1,40 +1,46 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface VotingCard {
-    imgUrl: string;
-    title: string;
-    subtitle: string;
-  }
+  imgUrl: string;
+  title: string;
+  subtitle: string;
+}
+
+export enum VotingCardStatus {
+  Loading,
+  Ready,
+  Error,
+}
 
 interface CardState {
-  leftCard?: VotingCard
-  rightCard?: VotingCard
-  loadingCards: boolean
+  leftCard?: VotingCard;
+  rightCard?: VotingCard;
+  cardStatus: VotingCardStatus;
 }
 
 const initialState: CardState = {
-    loadingCards: true
-}
+  cardStatus: VotingCardStatus.Loading,
+};
 
 interface SetCardPayload {
-    leftCard: VotingCard
-    rightCard: VotingCard
+  leftCard: VotingCard;
+  rightCard: VotingCard;
 }
 
 export const cardsSlice = createSlice({
-  name: 'cards',
+  name: "cards",
   initialState,
   reducers: {
-    setCards: (state, action: PayloadAction<SetCardPayload> ) => {
-      state.leftCard = action.payload.leftCard
-      state.rightCard = action.payload.rightCard
-      state.loadingCards = false
+    setCards: (state, action: PayloadAction<SetCardPayload>) => {
+      state.leftCard = action.payload.leftCard;
+      state.rightCard = action.payload.rightCard;
+      state.cardStatus = VotingCardStatus.Ready;
     },
-    setLoadingCards: (state) => {
-        state.loadingCards = true
-    }
-  }
-})
+    setCardsStatus: (state, action: PayloadAction<VotingCardStatus>) => {
+      state.cardStatus = action.payload;
+    },
+  },
+});
 
-export const { setCards, setLoadingCards } = cardsSlice.actions
-export default cardsSlice.reducer
+export const { setCards, setCardsStatus } = cardsSlice.actions;
+export default cardsSlice.reducer;
