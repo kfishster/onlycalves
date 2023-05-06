@@ -23,8 +23,8 @@ export function Navbar() {
 
   return (
     <div className="flex flex-row items-center gap-2 justify-between h-24 w-screen px-8">
-      <div className="flex h-14 w-14 transition-all bg-gradient-to-br from-indigo-200 to-sky-300 dark:from-sky-700 dark:to-indigo-800 items-center align-center text-center">
-        <p className="flex text-xs">Cool Logo</p>
+      <div className="flex h-32 w-32 items-center align-center text-center">
+        <img src="/logo512.png" />
       </div>
       <div className="flex flex-col items-center gap-1 text-center p-1">
         <Link to="/">
