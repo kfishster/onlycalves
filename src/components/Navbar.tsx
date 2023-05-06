@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Theme, setTagline, setTheme } from "../store/settingsSlice";
+import { Link } from "react-router-dom";
 
 const taglines = [
   "this is my better calf",
@@ -26,7 +27,9 @@ export function Navbar() {
         <p className="flex text-xs">Cool Logo</p>
       </div>
       <div className="flex flex-col items-center gap-1 text-center p-1">
-        <h1 className="flex text-3xl md:text-5xl font-bold">OnlyCalves</h1>
+        <Link to="/">
+          <h1 className="flex text-3xl md:text-5xl font-bold">OnlyCalves</h1>
+        </Link>
         <h1 className="flex text-lg md:text-2xl font-light">{tagline}</h1>
       </div>
       <DarkModeToggle

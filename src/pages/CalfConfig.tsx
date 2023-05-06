@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect } from "react";
 import {
   CalfConfig,
   CalfPicture,
@@ -9,7 +9,6 @@ import {
   deletePicture,
   fetchedConfig,
   fetchedPictures,
-  newUser,
   removePicture,
   setConfigNickname,
   setConfigStatus,
@@ -33,6 +32,7 @@ interface EditableConfigPageProps {
 
 interface InputWithLabelProps {
   label: string;
+  description: string;
   value: string;
   placeholder: string;
   onChange: (value: string) => void;
@@ -102,9 +102,6 @@ const PictureSelection = () => {
             <PictureFrame
               pictureUrl={picture.pictureUrl}
               onDelete={() => dispatch(deletePicture(picture.pictureUrl))}
-              //   onDelete={() =>
-              //     picture.file && userId && uploadPicture(userId, picture.file)
-              //   }
             />
           ))}
         <label className="flex flex-1 h-full flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -146,14 +143,18 @@ const PictureSelection = () => {
 
 const InputWithLabel = ({
   label,
+  description,
   value,
   placeholder,
   onChange,
 }: InputWithLabelProps) => {
   return (
     <div className="flex flex-col">
-      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      <label className="block mb-2 text-md font-bold text-gray-900 dark:text-white">
         {label}
+      </label>
+      <label className="block mb-2 text-sm italic font-light text-gray-900 dark:text-white">
+        {description}
       </label>
       <input
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -282,26 +283,35 @@ export const EditableConfigPage = ({ config }: EditableConfigPageProps) => {
         <InputWithLabel
           label="Nickname"
           value={config.nickname}
+          description="how you'll find this profile in the configuration page, not main page"
           placeholder="arnold schwarzcalfer"
           onChange={(value: string) => dispatch(setConfigNickname(value))}
         />
         <InputWithLabel
           label="Title"
           value={config.title}
+          description="the name of your calf on the main page"
           placeholder="the golden calf"
           onChange={(value: string) => dispatch(setConfigTitle(value))}
         />
         <InputWithLabel
           label="Subtitle"
+          description="the fun, quirky, byline about your calf that will be shown in the main page"
           value={config.subtitle}
           placeholder="leg day everyday"
           onChange={(value: string) => dispatch(setConfigSubtitle(value))}
         />
       </div>
       <div className="flex flex-col gap-2 w-1/2">
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Pictures
-        </label>
+        <div>
+          <label className="block mb-2 text-md font-bold text-gray-900 dark:text-white">
+            Pictures
+          </label>
+          <label className="block mb-2 text-sm italic font-light text-gray-900 dark:text-white">
+            upload as many as you'd like, visitors will see one of these picked
+            randomly
+          </label>
+        </div>
         <PictureSelection />
       </div>
 
