@@ -9,7 +9,7 @@ import {
 } from "../store/cardsSlice";
 import { CalfCard, CardType } from "../components/CalfCard";
 import { About } from "../components/About";
-import { fetchRandomMatchup } from "../utils/apiConnector";
+import { fetchRandomMatchup, writeMatchupResult } from "../utils/apiConnector";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +39,29 @@ export const Home = () => {
     // dispatch(setCards({ leftCard, rightCard }));
   }, [dispatch]);
 
-  const onCardSelected = () => {
+  const registerMatchResult = useCallback(
+    async (
+      leftCard: VotingCard,
+      rightCard: VotingCard,
+      selectedCard: VotingCard
+    ) => {
+      await writeMatchupResult({
+        userId1: leftCard.userId,
+        userId2: rightCard.userId,
+        winnerUserId: selectedCard.userId,
+      });
+    },
+    []
+  );
+
+  const onCardSelected = (selectedCard?: VotingCard) => {
+    if (cardsState.leftCard && cardsState.rightCard && selectedCard) {
+      registerMatchResult(
+        cardsState.leftCard,
+        cardsState.rightCard,
+        selectedCard
+      );
+    }
     dispatch(setCardsStatus(VotingCardStatus.Loading));
     setTimeout(() => {
       selectNewCards();
@@ -61,13 +83,13 @@ export const Home = () => {
             cardType={CardType.Left}
             cardContents={cardsState.leftCard}
             isShowing={cardsState.cardStatus === VotingCardStatus.Ready}
-            onSelected={onCardSelected}
+            onSelected={() => onCardSelected(cardsState.leftCard)}
           />
           <CalfCard
             cardType={CardType.Right}
             cardContents={cardsState.rightCard}
             isShowing={cardsState.cardStatus === VotingCardStatus.Ready}
-            onSelected={onCardSelected}
+            onSelected={() => onCardSelected(cardsState.rightCard)}
           />
         </div>
       </div>

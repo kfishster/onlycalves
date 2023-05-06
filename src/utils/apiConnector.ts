@@ -23,6 +23,12 @@ export interface CalfPictureResponse {
   containerUrl: string;
 }
 
+export interface MatchupResult {
+  userId1: string;
+  userId2: string;
+  winnerUserId: string;
+}
+
 export type MatchupResponse = CalfConfig & CalfPictureResponse;
 
 export const fetchCalfConfig = async (
@@ -137,5 +143,18 @@ export const deleteCalfPicture = async (
     await res.json();
   } catch (e) {
     throw Error("Pictures couldn't be fetched");
+  }
+};
+
+export const writeMatchupResult = async (
+  result: MatchupResult
+): Promise<void> => {
+  try {
+    await fetch(`${apiRoot}/matchupResult`, {
+      method: "POST",
+      body: JSON.stringify(result),
+    });
+  } catch (e) {
+    throw Error("Config couldn't be loaded");
   }
 };

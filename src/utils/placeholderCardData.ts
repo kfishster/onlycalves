@@ -26,6 +26,7 @@ export const getPlaceholderCard = (imgUrlIdx?: number): VotingCard => {
   const calfNum = Math.floor(Math.random() * 13);
 
   return {
+    userId: "",
     imgUrl: imgUrl,
     title: `Calf ${calfNum}`,
     subtitle: subtitle,
