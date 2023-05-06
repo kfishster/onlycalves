@@ -5,6 +5,7 @@ import { Theme } from "./store/settingsSlice";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { CalfConfigPage } from "./pages/CalfConfig";
+import { CalfConfigSelection } from "./pages/CalfConfigSelection";
 
 const AppLayout = () => {
   const theme = useAppSelector((state) => state.settings.theme);
@@ -18,9 +19,9 @@ const AppLayout = () => {
   const themeClasses = themeDefaultTopLevelClasses[theme];
 
   return (
-    <div className={`h-screen ${isDarkMode ? "dark" : ""}`}>
+    <div className={`${isDarkMode ? "dark" : ""}`}>
       <div
-        className={`flex transition-colors duration-1000 flex-col items-center h-full gap-8 p-8 w-screen ${themeClasses}`}
+        className={`flex transition-colors duration-1000 flex-col items-center min-h-screen gap-8 p-8 w-screen ${themeClasses}`}
       >
         <Navbar />
         <Outlet />
@@ -38,6 +39,10 @@ function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "calfConfig",
+          element: <CalfConfigSelection />,
         },
         {
           path: "calfConfig/:userId",

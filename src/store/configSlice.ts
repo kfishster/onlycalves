@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getRandomImgUrl } from "../utils/placeholderCardData";
 
 export interface CalfConfig {
   userId: string;
@@ -7,8 +8,27 @@ export interface CalfConfig {
   subtitle: string;
 }
 
+export interface SetPictureStatusProps {
+  status: CalfPictureStatus;
+  pictureUrl: string;
+}
+
+export enum CalfPictureStatus {
+  Uploaded,
+  Local,
+  Delete,
+  UploadInProgress,
+}
+
+export interface CalfPicture {
+  file?: File;
+  name?: string;
+  pictureUrl: string;
+  pictureStatus: CalfPictureStatus;
+}
+
 export enum ConfigStatus {
-  Loaded,
+  Ready,
   Loading,
   Saving,
   Saved,
@@ -24,11 +44,23 @@ export interface ConfigState {
   status: ConfigStatus;
   configType: ConfigType;
   config?: CalfConfig;
+  pictures: CalfPicture[];
 }
+
+// const staticPictureUrls = [
+//   getRandomImgUrl(),
+//   getRandomImgUrl(),
+//   getRandomImgUrl(),
+// ];
 
 const initialState: ConfigState = {
   status: ConfigStatus.Loading,
   configType: ConfigType.New,
+  //   pictures: staticPictureUrls.map((p) => ({
+  //     pictureUrl: p,
+  //     pictureStatus: CalfPictureStatus.Uploaded,
+  //   })),
+  pictures: [],
 };
 
 export const configSlice = createSlice({
@@ -38,27 +70,77 @@ export const configSlice = createSlice({
     setConfigStatus: (state, action: PayloadAction<ConfigStatus>) => {
       state.status = action.payload;
     },
+    newUser: (state, action: PayloadAction<string>) => {
+      state.config = {
+        userId: action.payload,
+        nickname: "",
+        title: "",
+        subtitle: "",
+      };
+
+      state.configType = ConfigType.New;
+      state.status = ConfigStatus.Ready;
+      state.pictures = [];
+    },
     fetchedConfig: (state, action: PayloadAction<CalfConfig>) => {
-      state.status = ConfigStatus.Loaded;
+      state.status = ConfigStatus.Ready;
       state.config = action.payload;
       state.configType = ConfigType.Existing;
     },
     setConfigNickname: (state, action: PayloadAction<string>) => {
       if (state.config) {
         state.config.nickname = action.payload;
-        state.status = ConfigStatus.Loaded;
+        state.status = ConfigStatus.Ready;
       }
     },
     setConfigTitle: (state, action: PayloadAction<string>) => {
       if (state.config) {
         state.config.title = action.payload;
-        state.status = ConfigStatus.Loaded;
+        state.status = ConfigStatus.Ready;
       }
     },
     setConfigSubtitle: (state, action: PayloadAction<string>) => {
       if (state.config) {
         state.config.subtitle = action.payload;
-        state.status = ConfigStatus.Loaded;
+        state.status = ConfigStatus.Ready;
+      }
+    },
+    setPictureStatus: (state, action: PayloadAction<SetPictureStatusProps>) => {
+      const pic = state.pictures.find(
+        (p) => p.pictureUrl === action.payload.pictureUrl
+      );
+      if (pic) {
+        pic.pictureStatus = action.payload.status;
+      }
+    },
+    fetchedPictures: (state, action: PayloadAction<CalfPicture[]>) => {
+      state.pictures = action.payload;
+    },
+    addPicture: (state, action: PayloadAction<CalfPicture>) => {
+      state.pictures.push(action.payload);
+    },
+    deletePicture: (state, action: PayloadAction<string>) => {
+      const picToDelete = state.pictures.find(
+        (p) => p.pictureUrl === action.payload
+      );
+      if (picToDelete) {
+        if (picToDelete.pictureStatus === CalfPictureStatus.Local) {
+          state.pictures = state.pictures.filter(
+            (p) => p.pictureUrl !== action.payload
+          );
+        } else if (picToDelete.pictureStatus === CalfPictureStatus.Uploaded) {
+          picToDelete.pictureStatus = CalfPictureStatus.Delete;
+        }
+      }
+    },
+    removePicture: (state, action: PayloadAction<string>) => {
+      const picToDelete = state.pictures.find(
+        (p) => p.pictureUrl === action.payload
+      );
+      if (picToDelete) {
+        state.pictures = state.pictures.filter(
+          (p) => p.pictureUrl !== action.payload
+        );
       }
     },
   },
@@ -70,5 +152,11 @@ export const {
   setConfigNickname,
   setConfigTitle,
   setConfigSubtitle,
+  newUser,
+  fetchedPictures,
+  addPicture,
+  deletePicture,
+  setPictureStatus,
+  removePicture,
 } = configSlice.actions;
 export default configSlice.reducer;
