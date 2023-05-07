@@ -1,6 +1,6 @@
 export function About() {
   return (
-    <div className="flex flex-col text-center gap-2 pt-8 md:w-1/2 w-full">
+    <div className="flex flex-col text-center gap-2 pt-12 md:w-1/2 w-3/4">
       <h1 className="text-4xl font-semibold">About our team</h1>
       <p className="flex flex-col italic font-light gap-2 text-md">
         <p>Hi there!</p>

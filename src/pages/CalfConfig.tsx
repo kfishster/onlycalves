@@ -27,8 +27,7 @@ import {
   writeCalfConfig,
 } from "../utils/apiConnector";
 import { Switch } from "@headlessui/react";
-import { reactPlugin } from "..";
-import { withAITracking } from "@microsoft/applicationinsights-react-js";
+import { appInsightsTracking } from "../utils/appInsights";
 
 interface EditableConfigPageProps {
   config: CalfConfig;
@@ -426,4 +425,4 @@ const CalfConfigPage = () => {
   );
 };
 
-export default withAITracking(reactPlugin, CalfConfigPage);
+export default appInsightsTracking("CalfConfigPage", CalfConfigPage);

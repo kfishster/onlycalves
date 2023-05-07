@@ -10,8 +10,7 @@ import {
   MatchupResultsResponse,
   fetchMatchupResults,
 } from "../utils/apiConnector";
-import { withAITracking } from "@microsoft/applicationinsights-react-js";
-import { reactPlugin } from "..";
+import { appInsightsTracking } from "../utils/appInsights";
 
 // const placeholderLeaderboard: LeaderboardRow[] = [
 //   { userId: "aa", nickname: "aa", score: 200 },
@@ -82,8 +81,8 @@ const Leaderboard = () => {
         <div>Loading...</div>
       )}
       {leaderboard.status === LeaderboardStatus.Ready && (
-        <div>
-          <div className="flex flex-col gap-2">
+        <div className="flex w-full">
+          <div className="flex flex-col gap-2 w-full">
             {leaderboard.leaderboardRows.map((row, idx) => (
               <div
                 className={`flex flex-row transition-colors justify-between dark:bg-slate-700 bg-slate-200 rounded-lg p-2 px-4 h-full items-center ${
@@ -110,4 +109,4 @@ const Leaderboard = () => {
   );
 };
 
-export default withAITracking(reactPlugin, Leaderboard);
+export default appInsightsTracking("Leaderboard", Leaderboard);

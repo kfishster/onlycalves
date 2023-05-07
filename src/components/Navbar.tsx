@@ -25,13 +25,13 @@ export function Navbar() {
 
   return (
     <div className="flex flex-row items-center gap-4 justify-between h-24 w-screen px-8">
-      <div className="flex md:h-32 md:w-32 w-20 h-20 items-center align-center text-center">
-        <img src="/logo512.png" alt="logo" />
-      </div>
+      <Link to="/">
+        <div className="flex md:h-32 md:w-32 w-20 h-20 items-center align-center text-center">
+          <img src="/logo512.png" alt="logo" />
+        </div>
+      </Link>
       <div className="flex flex-col items-center gap-1 text-center p-1">
-        <Link to="/">
-          <h1 className="flex text-3xl md:text-5xl font-bold">OnlyCalves</h1>
-        </Link>
+        <h1 className="flex text-3xl md:text-5xl font-bold">OnlyCalves</h1>
         <h1 className="flex text-lg md:text-2xl font-light">{tagline}</h1>
       </div>
       <div className="flex md:flex-row flex-col-reverse md:w-32 w-20 gap-2 items-center">
