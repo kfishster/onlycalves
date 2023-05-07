@@ -397,7 +397,7 @@ export const CalfConfigPage = () => {
       fetchConfig();
       fetchCalfPictures();
     }
-  }, [dispatch, params, calfConfig?.userId, calfConfigStatus]);
+  }, [dispatch, params, calfConfig?.userId]);
 
   const showConfigPage = (
     status: ConfigStatus,
