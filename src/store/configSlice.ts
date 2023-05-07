@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getRandomImgUrl } from "../utils/placeholderCardData";
 
 export interface CalfConfig {
   userId: string;

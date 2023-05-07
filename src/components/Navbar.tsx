@@ -26,7 +26,7 @@ export function Navbar() {
   return (
     <div className="flex flex-row items-center gap-4 justify-between h-24 w-screen px-8">
       <div className="flex md:h-32 md:w-32 w-20 h-20 items-center align-center text-center">
-        <img src="/logo512.png" />
+        <img src="/logo512.png" alt="logo" />
       </div>
       <div className="flex flex-col items-center gap-1 text-center p-1">
         <Link to="/">

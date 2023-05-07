@@ -1,6 +1,5 @@
 import { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { getPlaceholderCard } from "../utils/placeholderCardData";
 import {
   VotingCard,
   VotingCardStatus,

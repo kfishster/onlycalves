@@ -1,4 +1,3 @@
-import { VotingCard } from "../store/cardsSlice";
 import { CalfConfig } from "../store/configSlice";
 import { CalfUser } from "../store/usersSlice";
 

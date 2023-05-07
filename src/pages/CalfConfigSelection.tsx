@@ -7,7 +7,7 @@ import {
   setUsers,
 } from "../store/usersSlice";
 import { fetchUsers } from "../utils/apiConnector";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { newUser } from "../store/configSlice";
 
 const makeRandomString = (length: number) => {

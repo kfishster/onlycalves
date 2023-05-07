@@ -7,18 +7,17 @@ import {
   setLeaderboardStatus,
 } from "../store/leaderboardSlice";
 import {
-  MatchupResult,
   MatchupResultsResponse,
   fetchMatchupResults,
 } from "../utils/apiConnector";
 
-const placeholderLeaderboard: LeaderboardRow[] = [
-  { userId: "aa", nickname: "aa", score: 200 },
-  { userId: "aa", nickname: "the cool one", score: 10 },
-  { userId: "aa", nickname: "oh yas", score: 0 },
-  { userId: "aa", nickname: "asdkjh asdfkjh asdf lkjh", score: 0 },
-  { userId: "aa", nickname: "asdkjha a", score: 0 },
-];
+// const placeholderLeaderboard: LeaderboardRow[] = [
+//   { userId: "aa", nickname: "aa", score: 200 },
+//   { userId: "aa", nickname: "the cool one", score: 10 },
+//   { userId: "aa", nickname: "oh yas", score: 0 },
+//   { userId: "aa", nickname: "asdkjh asdfkjh asdf lkjh", score: 0 },
+//   { userId: "aa", nickname: "asdkjha a", score: 0 },
+// ];
 
 const computeLeaderboard = (
   matchupResultsResponse: MatchupResultsResponse
@@ -72,7 +71,7 @@ export const Leaderboard = () => {
     // load leaderboard
     getMatchupResults();
     // dispatch(setLeaderboardRows(placeholderLeaderboard));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col md:w-1/2 w-full gap-4">
@@ -86,7 +85,7 @@ export const Leaderboard = () => {
             {leaderboard.leaderboardRows.map((row, idx) => (
               <div
                 className={`flex flex-row transition-colors justify-between dark:bg-slate-700 bg-slate-200 rounded-lg p-2 px-4 h-full items-center ${
-                  idx == 0
+                  idx === 0
                     ? " bg-gradient-to-r dark:from-blue-800 dark:to-blue-600 from-blue-300 to-blue-500"
                     : ""
                 }`}

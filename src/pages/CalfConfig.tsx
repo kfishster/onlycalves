@@ -48,7 +48,11 @@ interface PictureFrameProps {
 const PictureFrame = ({ pictureUrl, onDelete }: PictureFrameProps) => {
   return (
     <div className="flex flex-1 h-full rounded-xl overflow-clip">
-      <img src={pictureUrl} className="flex w-full object-cover" />
+      <img
+        src={pictureUrl}
+        className="flex w-full object-cover"
+        alt="calf card"
+      />
       <div className="flex flex-col-reverse relative">
         <button
           onClick={onDelete}
@@ -77,7 +81,6 @@ const PictureFrame = ({ pictureUrl, onDelete }: PictureFrameProps) => {
 const PictureSelection = () => {
   const dispatch = useAppDispatch();
   const pictures = useAppSelector((state) => state.config.pictures);
-  const userId = useAppSelector((state) => state.config.config?.userId);
 
   const onNewPicture = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -394,7 +397,7 @@ export const CalfConfigPage = () => {
       fetchConfig();
       fetchCalfPictures();
     }
-  }, [dispatch, params]);
+  }, [dispatch, params, calfConfig?.userId, calfConfigStatus]);
 
   const showConfigPage = (
     status: ConfigStatus,
