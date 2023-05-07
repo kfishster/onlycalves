@@ -6,6 +6,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { CalfConfigPage } from "./pages/CalfConfig";
 import { CalfConfigSelection } from "./pages/CalfConfigSelection";
+import { Leaderboard } from "./pages/Leaderboard";
 
 const AppLayout = () => {
   const theme = useAppSelector((state) => state.settings.theme);
@@ -47,6 +48,10 @@ function App() {
         {
           path: "calfConfig/:userId",
           element: <CalfConfigPage />,
+        },
+        {
+          path: "leaderboard",
+          element: <Leaderboard />,
         },
       ],
     },

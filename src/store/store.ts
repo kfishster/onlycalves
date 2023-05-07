@@ -3,6 +3,7 @@ import cardsSlice from "./cardsSlice";
 import settingsSlice from "./settingsSlice";
 import configSlice from "./configSlice";
 import usersSlice from "./usersSlice";
+import leaderboardSlice from "./leaderboardSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     settings: settingsSlice,
     config: configSlice,
     users: usersSlice,
+    leaderboard: leaderboardSlice,
   },
 });
 

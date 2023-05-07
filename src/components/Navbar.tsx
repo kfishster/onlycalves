@@ -3,6 +3,7 @@ import DarkModeToggle from "react-dark-mode-toggle";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Theme, setTagline, setTheme } from "../store/settingsSlice";
 import { Link } from "react-router-dom";
+import { PencilSquareIcon, TrophyIcon } from "@heroicons/react/24/outline";
 
 const taglines = [
   "this is my better calf",
@@ -10,6 +11,7 @@ const taglines = [
   "calf full, or calf empty? you be the judge",
   "just wait till you see my other calf",
   "(noun) (ˈkävz): The fleshy back part of the leg below the knee",
+  "grass fed",
 ];
 
 export function Navbar() {
@@ -22,8 +24,8 @@ export function Navbar() {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-row items-center gap-2 justify-between h-24 w-screen px-8">
-      <div className="flex h-32 w-32 items-center align-center text-center">
+    <div className="flex flex-row items-center gap-4 justify-between h-24 w-screen px-8">
+      <div className="flex md:h-32 md:w-32 w-20 h-20 items-center align-center text-center">
         <img src="/logo512.png" />
       </div>
       <div className="flex flex-col items-center gap-1 text-center p-1">
@@ -32,13 +34,25 @@ export function Navbar() {
         </Link>
         <h1 className="flex text-lg md:text-2xl font-light">{tagline}</h1>
       </div>
-      <DarkModeToggle
-        onChange={() =>
-          dispatch(setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark))
-        }
-        checked={theme === Theme.Dark}
-        size={60}
-      />
+      <div className="flex md:flex-row flex-col-reverse md:w-32 w-20 gap-2 items-center">
+        <Link to="/calfConfig">
+          <div className="w-6 h-6">
+            <PencilSquareIcon />
+          </div>
+        </Link>
+        <Link to="/leaderboard">
+          <div className="w-6 h-6">
+            <TrophyIcon />
+          </div>
+        </Link>
+        <DarkModeToggle
+          onChange={() =>
+            dispatch(setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark))
+          }
+          checked={theme === Theme.Dark}
+          size={60}
+        />
+      </div>
     </div>
   );
 }

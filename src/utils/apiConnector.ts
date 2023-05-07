@@ -29,6 +29,11 @@ export interface MatchupResult {
   winnerUserId: string;
 }
 
+export interface MatchupResultsResponse {
+  matchups: MatchupResult[];
+  activeUsers: CalfUser[];
+}
+
 export type MatchupResponse = CalfConfig & CalfPictureResponse;
 
 export const fetchCalfConfig = async (
@@ -156,5 +161,19 @@ export const writeMatchupResult = async (
     });
   } catch (e) {
     throw Error("Config couldn't be loaded");
+  }
+};
+
+export const fetchMatchupResults = async (): Promise<
+  MatchupResultsResponse | CalfConfigError
+> => {
+  try {
+    const res = await fetch(`${apiRoot}/getMatchupResults`, {
+      method: "POST",
+    });
+    const matchupResultsResponse = (await res.json()) as MatchupResultsResponse;
+    return matchupResultsResponse;
+  } catch (e) {
+    throw Error("Matchup results couldn't be loaded");
   }
 };

@@ -39,7 +39,7 @@ export function CalfCard({
 
   return (
     <button
-      className={`group hover:scale-110 w-52 h-full transition-transform`}
+      className={`group hover:scale-110 hover:z-20 w-52 h-full transition-transform`}
       onClick={onSelected}
     >
       <Transition

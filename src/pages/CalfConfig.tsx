@@ -270,7 +270,7 @@ export const EditableConfigPage = ({ config }: EditableConfigPageProps) => {
     return (
       <button
         onClick={onSubmit}
-        className="flex flex-row items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="justify-center flex flex-row items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         disabled={showLoadingGlyph}
       >
         {showLoadingGlyph && <LoadingGlyph />}
@@ -281,7 +281,7 @@ export const EditableConfigPage = ({ config }: EditableConfigPageProps) => {
 
   return (
     <div className="flex flex-col w-full items-center gap-8">
-      <div className="flex flex-col w-1/2 gap-4">
+      <div className="flex flex-col md:w-1/2 w-full gap-4">
         <InputWithLabel
           label="Nickname"
           value={config.nickname}
@@ -304,7 +304,7 @@ export const EditableConfigPage = ({ config }: EditableConfigPageProps) => {
           onChange={(value: string) => dispatch(setConfigSubtitle(value))}
         />
       </div>
-      <div className="flex flex-col w-1/2">
+      <div className="flex flex-col md:w-1/2 w-full">
         <div className="flex flex-row gap-4">
           <label className="block mb-2 text-md font-bold text-gray-900 dark:text-white">
             Enable calf
@@ -329,7 +329,7 @@ export const EditableConfigPage = ({ config }: EditableConfigPageProps) => {
           keep this off
         </label>
       </div>
-      <div className="flex flex-col gap-2 w-1/2">
+      <div className="flex flex-col gap-2 md:w-1/2 w-full">
         <div>
           <label className="block mb-2 text-md font-bold text-gray-900 dark:text-white">
             Pictures
@@ -391,7 +391,6 @@ export const CalfConfigPage = () => {
       calfConfigStatus !== ConfigStatus.Ready ||
       (params && params.userId && params.userId !== calfConfig?.userId)
     ) {
-      //   dispatch(newUser("asd"));
       fetchConfig();
       fetchCalfPictures();
     }
