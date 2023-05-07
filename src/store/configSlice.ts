@@ -47,19 +47,9 @@ export interface ConfigState {
   pictures: CalfPicture[];
 }
 
-// const staticPictureUrls = [
-//   getRandomImgUrl(),
-//   getRandomImgUrl(),
-//   getRandomImgUrl(),
-// ];
-
 const initialState: ConfigState = {
   status: ConfigStatus.Loading,
   configType: ConfigType.New,
-  //   pictures: staticPictureUrls.map((p) => ({
-  //     pictureUrl: p,
-  //     pictureStatus: CalfPictureStatus.Uploaded,
-  //   })),
   pictures: [],
 };
 
