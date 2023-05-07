@@ -9,8 +9,10 @@ import {
 import { CalfCard, CardType } from "../components/CalfCard";
 import { About } from "../components/About";
 import { fetchRandomMatchup, writeMatchupResult } from "../utils/apiConnector";
+import { withAITracking } from "@microsoft/applicationinsights-react-js";
+import { reactPlugin } from "..";
 
-export const Home = () => {
+const Home = () => {
   const dispatch = useAppDispatch();
   const cardsState = useAppSelector((state) => state.cards);
 
@@ -96,3 +98,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default withAITracking(reactPlugin, Home);

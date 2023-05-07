@@ -10,6 +10,8 @@ import {
   MatchupResultsResponse,
   fetchMatchupResults,
 } from "../utils/apiConnector";
+import { withAITracking } from "@microsoft/applicationinsights-react-js";
+import { reactPlugin } from "..";
 
 // const placeholderLeaderboard: LeaderboardRow[] = [
 //   { userId: "aa", nickname: "aa", score: 200 },
@@ -50,7 +52,7 @@ const computeLeaderboard = (
   return leaderboardRows;
 };
 
-export const Leaderboard = () => {
+const Leaderboard = () => {
   const dispatch = useAppDispatch();
   const leaderboard = useAppSelector((state) => state.leaderboard);
 
@@ -107,3 +109,5 @@ export const Leaderboard = () => {
     </div>
   );
 };
+
+export default withAITracking(reactPlugin, Leaderboard);

@@ -27,6 +27,8 @@ import {
   writeCalfConfig,
 } from "../utils/apiConnector";
 import { Switch } from "@headlessui/react";
+import { reactPlugin } from "..";
+import { withAITracking } from "@microsoft/applicationinsights-react-js";
 
 interface EditableConfigPageProps {
   config: CalfConfig;
@@ -350,7 +352,7 @@ export const EditableConfigPage = ({ config }: EditableConfigPageProps) => {
   );
 };
 
-export const CalfConfigPage = () => {
+const CalfConfigPage = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const calfConfig = useAppSelector((state) => state.config.config);
@@ -397,7 +399,7 @@ export const CalfConfigPage = () => {
       fetchConfig();
       fetchCalfPictures();
     }
-  }, [dispatch, params, calfConfig?.userId]);
+  }, [dispatch, params, calfConfig?.userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const showConfigPage = (
     status: ConfigStatus,
@@ -423,3 +425,5 @@ export const CalfConfigPage = () => {
     </div>
   );
 };
+
+export default withAITracking(reactPlugin, CalfConfigPage);

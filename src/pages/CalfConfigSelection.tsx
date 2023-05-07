@@ -9,6 +9,8 @@ import {
 import { fetchUsers } from "../utils/apiConnector";
 import { NavLink, useNavigate } from "react-router-dom";
 import { newUser } from "../store/configSlice";
+import { withAITracking } from "@microsoft/applicationinsights-react-js";
+import { reactPlugin } from "..";
 
 const makeRandomString = (length: number) => {
   let result = "";
@@ -22,7 +24,7 @@ const makeRandomString = (length: number) => {
   return result;
 };
 
-export const CalfConfigSelection = () => {
+const CalfConfigSelection = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -94,3 +96,5 @@ export const CalfConfigSelection = () => {
     </div>
   );
 };
+
+export default withAITracking(reactPlugin, CalfConfigSelection);
