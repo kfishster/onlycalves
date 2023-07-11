@@ -66,7 +66,7 @@ const Home = () => {
     dispatch(setCardsStatus(VotingCardStatus.Loading));
     setTimeout(() => {
       selectNewCards();
-    }, 2000);
+    }, 200);
   };
 
   useEffect(() => {
