@@ -24,7 +24,8 @@ const Home = () => {
       dispatch(setCardsStatus(VotingCardStatus.Loading));
       const votingCards: VotingCard[] = matchup.map((m) => ({
         ...m,
-        imgUrl: `${m.containerUrl}/${m.name}`,
+        // imgUrl: `${m.containerUrl}/${m.name}`,
+        imgUrl: `${m.cdnUrl}/tr:w-400/${m.name}`,
       }));
 
       const leftCard = votingCards[0];

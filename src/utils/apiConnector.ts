@@ -20,6 +20,7 @@ export interface CalfPictureResponse {
   name: string;
   properties: CalfPictureResponseProperties;
   containerUrl: string;
+  cdnUrl: string;
 }
 
 export interface MatchupResult {
