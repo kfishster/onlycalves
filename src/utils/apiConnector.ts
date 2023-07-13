@@ -1,4 +1,5 @@
 import { CalfConfig } from "../store/configSlice";
+import { LeaderboardRow } from "../store/leaderboardSlice";
 import { CalfUser } from "../store/usersSlice";
 
 const apiRoot = process.env.REACT_APP_API_URL;
@@ -30,8 +31,9 @@ export interface MatchupResult {
 }
 
 export interface MatchupResultsResponse {
-  matchups: MatchupResult[];
-  activeUsers: CalfUser[];
+  leaderboardRows: LeaderboardRow[];
+  // matchups: MatchupResult[];
+  // activeUsers: CalfUser[];
 }
 
 export type MatchupResponse = CalfConfig & CalfPictureResponse;

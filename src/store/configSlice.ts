@@ -78,15 +78,16 @@ export const configSlice = createSlice({
       state.config = action.payload;
       state.configType = ConfigType.Existing;
     },
-    setConfigNickname: (state, action: PayloadAction<string>) => {
-      if (state.config) {
-        state.config.nickname = action.payload;
-        state.status = ConfigStatus.Ready;
-      }
-    },
+    // setConfigNickname: (state, action: PayloadAction<string>) => {
+    //   if (state.config) {
+    //     state.config.nickname = action.payload;
+    //     state.status = ConfigStatus.Ready;
+    //   }
+    // },
     setConfigTitle: (state, action: PayloadAction<string>) => {
       if (state.config) {
         state.config.title = action.payload;
+        state.config.nickname = action.payload;
         state.status = ConfigStatus.Ready;
       }
     },
@@ -145,7 +146,7 @@ export const configSlice = createSlice({
 export const {
   setConfigStatus,
   fetchedConfig,
-  setConfigNickname,
+  // setConfigNickname,
   setConfigTitle,
   setConfigSubtitle,
   newUser,

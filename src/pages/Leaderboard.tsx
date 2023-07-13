@@ -20,36 +20,36 @@ import { appInsightsTracking } from "../utils/appInsights";
 //   { userId: "aa", nickname: "asdkjha a", score: 0 },
 // ];
 
-const computeLeaderboard = (
-  matchupResultsResponse: MatchupResultsResponse
-): LeaderboardRow[] => {
-  const leaderboardFreqCount: { [key: string]: number } = {};
+// const computeLeaderboard = (
+//   matchupResultsResponse: MatchupResultsResponse
+// ): LeaderboardRow[] => {
+//   const leaderboardFreqCount: { [key: string]: number } = {};
 
-  const activeUsers = Object.fromEntries(
-    matchupResultsResponse.activeUsers.map((x) => [x.userId, x.nickname])
-  );
+//   const activeUsers = Object.fromEntries(
+//     matchupResultsResponse.activeUsers.map((x) => [x.userId, x.nickname])
+//   );
 
-  // for now just a simple tally
-  for (const res of matchupResultsResponse.matchups) {
-    if (activeUsers[res.winnerUserId]) {
-      leaderboardFreqCount[res.winnerUserId] = leaderboardFreqCount[
-        res.winnerUserId
-      ]
-        ? leaderboardFreqCount[res.winnerUserId] + 1
-        : 1;
-    }
-  }
+//   // for now just a simple tally
+//   for (const res of matchupResultsResponse.matchups) {
+//     if (activeUsers[res.winnerUserId]) {
+//       leaderboardFreqCount[res.winnerUserId] = leaderboardFreqCount[
+//         res.winnerUserId
+//       ]
+//         ? leaderboardFreqCount[res.winnerUserId] + 1
+//         : 1;
+//     }
+//   }
 
-  const leaderboardRows: LeaderboardRow[] = Object.entries(leaderboardFreqCount)
-    .map((entry) => ({
-      userId: entry[0],
-      nickname: activeUsers[entry[0]],
-      score: entry[1],
-    }))
-    .sort((r1, r2) => r2.score - r1.score);
+//   const leaderboardRows: LeaderboardRow[] = Object.entries(leaderboardFreqCount)
+//     .map((entry) => ({
+//       userId: entry[0],
+//       nickname: activeUsers[entry[0]],
+//       score: entry[1],
+//     }))
+//     .sort((r1, r2) => r2.score - r1.score);
 
-  return leaderboardRows;
-};
+//   return leaderboardRows;
+// };
 
 const Leaderboard = () => {
   const dispatch = useAppDispatch();
@@ -64,7 +64,8 @@ const Leaderboard = () => {
         dispatch(setLeaderboardStatus(LeaderboardStatus.Error));
       } else {
         dispatch(
-          setLeaderboardRows(computeLeaderboard(matchupResultsResponse))
+          //   setLeaderboardRows(computeLeaderboard(matchupResultsResponse))
+          setLeaderboardRows(matchupResultsResponse.leaderboardRows)
         );
       }
     };
@@ -85,21 +86,28 @@ const Leaderboard = () => {
           <div className="flex flex-col gap-2 w-full">
             {leaderboard.leaderboardRows.map((row, idx) => (
               <div
-                className={`flex flex-row transition-colors justify-between dark:bg-slate-700 bg-slate-200 rounded-lg p-2 px-4 h-full items-center ${
+                className={`flex flex-row transition-colors dark:bg-slate-700 bg-slate-200 rounded-lg p-2 px-4 h-full items-center ${
                   idx === 0
                     ? " bg-gradient-to-r dark:from-blue-800 dark:to-blue-600 from-blue-300 to-blue-500"
                     : ""
                 }`}
               >
-                <div>{idx + 1}</div>
+                <div className="flex flex-1">{idx + 1}</div>
                 <div
                   className={`${
                     idx === 0 ? "text-2xl" : "text-lg"
-                  } font-semibold`}
+                  } font-semibold flex flex-1 justify-center`}
                 >
                   {row.nickname}
                 </div>
-                <div className="font-bold">{row.score}</div>
+                <div className="flex flex-1 flex-row gap-2 justify-end">
+                  <div className="text-sm justify-center flex items-center font-extralight">
+                    {row.score} / {row.matchups}
+                  </div>
+                  <div className="font-bold flex">
+                    {(row.approval * 100).toFixed(1)}%
+                  </div>
+                </div>
               </div>
             ))}
           </div>

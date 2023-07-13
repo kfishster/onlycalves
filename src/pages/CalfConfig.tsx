@@ -11,7 +11,6 @@ import {
   fetchedPictures,
   removePicture,
   setConfigEnabled,
-  setConfigNickname,
   setConfigStatus,
   setConfigSubtitle,
   setConfigTitle,
@@ -286,13 +285,6 @@ export const EditableConfigPage = ({ config }: EditableConfigPageProps) => {
   return (
     <div className="flex flex-col w-full items-center gap-8">
       <div className="flex flex-col md:w-1/2 w-full gap-4">
-        <InputWithLabel
-          label="Nickname"
-          value={config.nickname}
-          description="how you'll find this profile in the configuration page, not main page"
-          placeholder="arnold schwarzcalfer"
-          onChange={(value: string) => dispatch(setConfigNickname(value))}
-        />
         <InputWithLabel
           label="Title"
           value={config.title}

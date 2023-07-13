@@ -4,6 +4,8 @@ export interface LeaderboardRow {
   userId: string;
   nickname: string;
   score: number;
+  matchups: number;
+  approval: number;
 }
 
 export enum LeaderboardStatus {
