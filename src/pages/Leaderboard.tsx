@@ -101,7 +101,7 @@ const Leaderboard = () => {
                   </div>
                 </div>
                 <div className="flex flex-row gap-2 justify-end">
-                  <div className="text-sm justify-center flex items-center font-extralight">
+                  <div className="text-sm justify-center flex items-center font-extralight break-keep">
                     {row.score} / {row.matchups}
                   </div>
                   <div className="font-bold flex">
