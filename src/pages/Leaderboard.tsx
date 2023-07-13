@@ -82,21 +82,25 @@ const Leaderboard = () => {
           <div className="flex flex-col gap-2 w-full">
             {leaderboard.leaderboardRows.map((row, idx) => (
               <div
-                className={`flex flex-row transition-colors dark:bg-slate-700 bg-slate-200 rounded-lg p-2 px-4 h-full items-center ${
+                className={`flex flex-row justify-between transition-colors dark:bg-slate-700 bg-slate-200 rounded-lg p-2 px-4 h-full items-center ${
                   idx === 0
                     ? " bg-gradient-to-r dark:from-blue-800 dark:to-blue-600 from-blue-300 to-blue-500"
                     : ""
                 }`}
               >
-                <div className="flex flex-1">{idx + 1}</div>
-                <div
-                  className={`${
-                    idx === 0 ? "text-2xl" : "text-lg"
-                  } font-semibold flex flex-1 justify-center`}
-                >
-                  {row.nickname}
+                <div className="flex flex-row gap-3">
+                  <div className="flex items-center justify-center">
+                    {idx + 1}
+                  </div>
+                  <div
+                    className={`${
+                      idx === 0 ? "text-2xl" : "text-lg"
+                    } font-semibold flex justify-center`}
+                  >
+                    {row.nickname}
+                  </div>
                 </div>
-                <div className="flex flex-1 flex-row gap-2 justify-end">
+                <div className="flex flex-row gap-2 justify-end">
                   <div className="text-sm justify-center flex items-center font-extralight">
                     {row.score} / {row.matchups}
                   </div>
