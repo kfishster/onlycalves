@@ -1,15 +1,11 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
-  LeaderboardRow,
   LeaderboardStatus,
   setLeaderboardRows,
   setLeaderboardStatus,
 } from "../store/leaderboardSlice";
-import {
-  MatchupResultsResponse,
-  fetchMatchupResults,
-} from "../utils/apiConnector";
+import { fetchMatchupResults } from "../utils/apiConnector";
 import { appInsightsTracking } from "../utils/appInsights";
 
 // const placeholderLeaderboard: LeaderboardRow[] = [
