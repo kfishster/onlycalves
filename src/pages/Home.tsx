@@ -74,9 +74,9 @@ const Home = () => {
   }, [selectNewCards]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center gap-8">
       <div className="flex flex-col items-center gap-4 py-10 w-full">
-        <div className="flex flex-row h-40 md:h-64 md:w-3/5 w-3/4 md:justify-center gap-8 md:gap-20 justify-between px-2">
+        <div className="flex flex-row h-40 md:h-64 md:w-3/5 w-3/4 md:justify-center gap-12 md:gap-20 justify-between px-2">
           {cardsState.cardStatus === VotingCardStatus.Error && (
             <div>Oh no something broke :(</div>
           )}

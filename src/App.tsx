@@ -22,7 +22,7 @@ const AppLayout = () => {
   return (
     <div className={`${isDarkMode ? "dark" : ""}`}>
       <div
-        className={`flex transition-colors duration-1000 flex-col items-center min-h-screen gap-8 p-8 w-screen ${themeClasses}`}
+        className={`flex transition-colors duration-1000 flex-col items-center min-h-screen gap-2 p-8 w-screen ${themeClasses}`}
       >
         <Navbar />
         <Outlet />
