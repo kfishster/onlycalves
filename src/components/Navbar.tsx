@@ -3,7 +3,7 @@ import DarkModeToggle from "react-dark-mode-toggle";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Theme, setTagline, setTheme } from "../store/settingsSlice";
 import { Link } from "react-router-dom";
-import { PencilSquareIcon, TrophyIcon } from "@heroicons/react/24/outline";
+import { TrophyIcon } from "@heroicons/react/24/outline";
 
 const taglines = [
   "this is my better calf",
@@ -35,11 +35,11 @@ export function Navbar() {
         <h1 className="flex text-lg md:text-2xl font-light">{tagline}</h1>
       </div>
       <div className="flex md:flex-row flex-col-reverse md:w-32 w-20 gap-2 items-center">
-        <Link to="/calfConfig">
+        {/* <Link to="/calfConfig">
           <div className="w-6 h-6">
             <PencilSquareIcon />
           </div>
-        </Link>
+        </Link> */}
         <Link to="/leaderboard">
           <div className="w-6 h-6">
             <TrophyIcon />
