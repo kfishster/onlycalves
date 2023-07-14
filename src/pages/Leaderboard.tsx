@@ -4,6 +4,7 @@ import {
   LeaderboardStatus,
   setLeaderboardRows,
   setLeaderboardStatus,
+  setTotalVotes,
 } from "../store/leaderboardSlice";
 import { fetchMatchupResults } from "../utils/apiConnector";
 import { appInsightsTracking } from "../utils/appInsights";
@@ -59,10 +60,8 @@ const Leaderboard = () => {
       if ("error" in matchupResultsResponse) {
         dispatch(setLeaderboardStatus(LeaderboardStatus.Error));
       } else {
-        dispatch(
-          //   setLeaderboardRows(computeLeaderboard(matchupResultsResponse))
-          setLeaderboardRows(matchupResultsResponse.leaderboardRows)
-        );
+        dispatch(setLeaderboardRows(matchupResultsResponse.leaderboardRows));
+        dispatch(setTotalVotes(matchupResultsResponse.totalVotes));
       }
     };
 
@@ -74,6 +73,9 @@ const Leaderboard = () => {
   return (
     <div className="flex flex-col md:w-1/2 w-full gap-4">
       <h1 className="text-3xl font-bold text-center">Leaderboard</h1>
+      <h3 className="text-md font-extralight text-center">
+        {leaderboard.totalCount} votes
+      </h3>
       {leaderboard.status === LeaderboardStatus.Loading && (
         <div>Loading...</div>
       )}

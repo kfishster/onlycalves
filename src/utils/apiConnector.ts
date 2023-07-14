@@ -32,6 +32,7 @@ export interface MatchupResult {
 
 export interface MatchupResultsResponse {
   leaderboardRows: LeaderboardRow[];
+  totalVotes: number;
   // matchups: MatchupResult[];
   // activeUsers: CalfUser[];
 }

@@ -16,11 +16,13 @@ export enum LeaderboardStatus {
 
 interface LeaderboardState {
   leaderboardRows: LeaderboardRow[];
+  totalCount: number;
   status: LeaderboardStatus;
 }
 
 const initialState: LeaderboardState = {
   leaderboardRows: [],
+  totalCount: 0,
   status: LeaderboardStatus.Loading,
 };
 
@@ -35,9 +37,12 @@ export const leaderboardSlice = createSlice({
     setLeaderboardStatus: (state, action: PayloadAction<LeaderboardStatus>) => {
       state.status = action.payload;
     },
+    setTotalVotes: (state, action: PayloadAction<number>) => {
+      state.totalCount = action.payload;
+    },
   },
 });
 
-export const { setLeaderboardRows, setLeaderboardStatus } =
+export const { setLeaderboardRows, setLeaderboardStatus, setTotalVotes } =
   leaderboardSlice.actions;
 export default leaderboardSlice.reducer;
