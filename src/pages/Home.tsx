@@ -94,7 +94,13 @@ const Home = () => {
           />
         </div>
       </div>
-      <About />
+      <div className="flex items-center flex-col pt-12 gap-4">
+        <div className="text-sm italic font-extralight flex w-3/4 md:w-3/5 text-center">
+          Calf matchups are totally random and will keep showing up as long as
+          you're voting
+        </div>
+        <About />
+      </div>
     </div>
   );
 };
