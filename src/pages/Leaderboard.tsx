@@ -8,6 +8,7 @@ import {
 } from "../store/leaderboardSlice";
 import { fetchMatchupResults } from "../utils/apiConnector";
 import { appInsightsTracking } from "../utils/appInsights";
+import numeral from "numeral";
 
 // const placeholderLeaderboard: LeaderboardRow[] = [
 //   { userId: "aa", nickname: "aa", score: 200 },
@@ -73,18 +74,18 @@ const Leaderboard = () => {
   return (
     <div className="flex flex-col md:w-1/2 w-full gap-4">
       <h1 className="text-3xl font-bold text-center">Leaderboard</h1>
-      <h3 className="text-md font-extralight text-center">
-        {leaderboard.totalCount} votes
-      </h3>
       {leaderboard.status === LeaderboardStatus.Loading && (
-        <div>Loading...</div>
+        <div className="text-center flex justify-center">Loading...</div>
       )}
       {leaderboard.status === LeaderboardStatus.Ready && (
         <div className="flex w-full">
           <div className="flex flex-col gap-2 w-full">
+            <div className="text-md font-extralight text-center">
+              {numeral(leaderboard.totalCount).format("0,0")} votes
+            </div>
             {leaderboard.leaderboardRows.map((row, idx) => (
               <div
-                className={`flex flex-row justify-between transition-colors dark:bg-slate-700 bg-slate-200 rounded-lg p-2 px-4 h-full items-center ${
+                className={`flex flex-row justify-between transition-colors gap-1 dark:bg-slate-700 bg-slate-200 rounded-lg p-2 px-4 h-full items-center ${
                   idx === 0
                     ? " bg-gradient-to-r dark:from-blue-800 dark:to-blue-600 from-blue-300 to-blue-500"
                     : ""
@@ -102,7 +103,7 @@ const Leaderboard = () => {
                     {row.nickname}
                   </div>
                 </div>
-                <div className="flex flex-row gap-2 justify-end">
+                <div className="flex flex-row flex-shrink-0 gap-2 justify-end">
                   <div className="text-sm justify-center flex items-center font-extralight break-keep">
                     {row.score} / {row.matchups}
                   </div>
